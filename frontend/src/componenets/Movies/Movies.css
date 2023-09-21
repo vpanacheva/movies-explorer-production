@@ -1,0 +1,43 @@
+.movies {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1280px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', 'Arial', sans-serif;
+}
+.movies__add-cards {
+  margin: 58px 0 79px 0;
+  padding: 0;
+  width: 320px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px solid #424242;
+  background: transparent;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  align-self: center;
+  cursor: pointer;
+}
+
+.movies__add-cards_inactive {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .movies__add-cards {
+    margin-top: 92px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .movies__add-cards {
+    max-width: 240px;
+    margin-top: 66px;
+    margin-bottom: 80px; /**проверить*/
+  }
+}
