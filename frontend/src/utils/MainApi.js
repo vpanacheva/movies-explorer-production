@@ -83,10 +83,10 @@ export const addCard = (data) => {
       duration: data.duration,
       year: data.year,
       description: data.description,
-      image: "https://api.nomoreparties.co" + data.image.url,
+      image: "https://api.nomoredomainsrocks.ru" + data.image.url,
       trailerLink: data.trailerLink,
       thumbnail:
-        "https://api.nomoreparties.co" + data.image.formats.thumbnail.url,
+        "https://api.nomoredomainsrocks.ru" + data.image.formats.thumbnail.url,
       movieId: data.id,
       nameRU: data.nameRU,
       nameEN: data.nameEN,
