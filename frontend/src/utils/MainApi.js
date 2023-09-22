@@ -1,6 +1,6 @@
 import { getCheckResponse } from "./functionHelpers"
 
-export const BASE_URL = 'https://api.vpanacheva.nomoreparties.co';
+export const BASE_URL = 'https://api.vpanacheva.nomoredomainsrocks.ru';
 //export const BASE_URL = "http://localhost:3000"
 
 export const getContent = (token) => {
