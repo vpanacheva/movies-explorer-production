@@ -1,5 +1,3 @@
-// import poster from '../images/poster.png';
-
 const moviesArray = [
   {
     name: '33 слова о дизайне',

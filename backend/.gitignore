@@ -5,6 +5,9 @@ logs
 # Dependency directory
 node_modules
 
+# SECRET_KEY
+.env
+
 # Optional npm cache directory
 .npm
 
@@ -24,13 +27,6 @@ coverage
 
 # production
 build
-
-# DS_store
-.DS_Store
-
-# env
-.env 
-
 
 # misc
 .env.local

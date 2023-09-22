@@ -1,26 +1,47 @@
-import './Form.css'
-import { Link } from 'react-router-dom'
-import logo from '../../images/logo.svg'
+import React from "react"
+import logo from "../../images/logo.svg"
+import { Link } from "react-router-dom"
+import "./Form.css"
 
-function Form(props) {
-  const { header, children, submit, text, link, path } = props
-
+function Form({
+  title,
+  children,
+  linkText,
+  buttonText,
+  isLoading,
+  link,
+  onSubmit,
+  registrationPrompt,
+  isDisabledButton,
+}) {
   return (
-    <section className='form'>
-      <div className='form__container'>
-        <Link to='/' className='form__link'>
-          <img className='form__logo' src={logo} alt='Логотип'></img>
+    <div className="form__block">
+      <Link to="/" className="logo">
+        <img src={logo} alt="логотип сайта" />
+      </Link>
+      <h3 className="form__title">{title}</h3>
+      <form onSubmit={onSubmit} id="form" className="form" noValidate>
+        {children}
+
+        <button
+          type="submit"
+          className={
+            isDisabledButton || isLoading
+              ? "form__button-save form__button-save_inactive"
+              : "form__button-save"
+          }
+          disabled={isDisabledButton ? true : false}
+        >
+          {buttonText}
+        </button>
+      </form>
+      <p className="form__text">
+        {registrationPrompt}
+        <Link to={link} className="form__link">
+          {linkText}
         </Link>
-        <h1 className='form__name'>{header}</h1>
-        <form className='form__content'>
-          <div className='form__inputs'>{children}</div>
-          <button type='submit' className='form__button button' disabled>{submit}</button>
-        </form>
-        <p className='form__footer'>{text}
-          <Link to={path} className='form__link'>{link}</Link>
-        </p>
-      </div>
-    </section>
+      </p>
+    </div>
   )
 }
 

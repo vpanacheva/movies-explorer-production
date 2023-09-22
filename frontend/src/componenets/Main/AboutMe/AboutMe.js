@@ -1,11 +1,11 @@
-import React from 'react';
-import './AboutMe.css';
-import studentPic from '../../../images/student-pic.png';
+import React from "react"
+import "./AboutMe.css"
+import studentPic from "../../../images/student-pic.png"
 
 function AboutMe() {
   return (
-    <section className='about-me' id='aboutme'>
-      <h2 className='about-me__title'>Студент</h2>
+    <section className="about-me" id="aboutme">
+   <h2 className='about-me__title'>Студент</h2>
       <div className='about-me__profile'>
         <div className='about-me__content'>
           <h3 className='about-me__name'>Варвара</h3>
@@ -17,10 +17,10 @@ function AboutMe() {
           </p>
           <a className='about-me__link' href='https://github.com/vpanacheva' target='_blank' rel='noreferrer'>Github</a>
         </div>
-        <img className='about-me__pic' src={studentPic} alt='Аватар студента Яндекс.Практикум' />
+        <img className="about-me__pic" src={studentPic} alt="Аватар" />
       </div>
     </section>
-  );
+  )
 }
 
-export default AboutMe;
+export default AboutMe

@@ -1,48 +1,61 @@
-import Form from '../Form/Form.js'
+import React from "react"
+import Form from "../Form/Form.js"
+import useForm from "../../hooks/useForm.js"
+import { EMAIL_REGEX } from "../../utils/constants.js"
+import "../Form/Form.css"
 
-function Login() {
+function Login({ onAuthorization, isLoading }) {
+  const { enteredValues, errors, handleChangeInput, isFormValid } = useForm()
+
+  function editProfileInfo(event) {
+    event.preventDefault()
+    onAuthorization({
+      email: enteredValues.email,
+      password: enteredValues.password,
+    })
+  }
+
   return (
-    <main className='login'>
-      <Form
-        className='form'
-        header='Рады видеть!'
-        submit='Войти'
-        text='Ещё не зарегистрированы?'
-        link='Регистрация'
-        path='/signup'
-      >
-        <div className='form__in'>
-        <p className='form__input-name'>E-mail</p>
-        <label className='form__input'>
-          <input
-            type='email'
-            className='form__input-data'
-            placeholder='Введите адрес электронной почты'
-            required
-          />
-        </label>
-        <p className='form__error'>Что-то пошло не так...</p>
-        </div>
-        <div className='form__in'>
-        <p className='form__input-name'>Пароль</p>
-        <label className='form__input'>
-        
-          <input
-            type='password'
-            className='form__input-data form__input-data_color-error'
-            minLength={3}
-            maxLength={25}
-            placeholder='Введите пароль'
-            required
-          />
-         
-        </label>
-        <p className='form__error form__error-display'>
-            Что-то пошло не так...
-          </p>
-        </div>
-      </Form>
-    </main>
+    <Form
+      title="Рады видеть!"
+      buttonText="Войти"
+      registrationPrompt="Еще не зарегистрированы?"
+      linkText=" Регистрация"
+      link="/signup"
+      isLoading={isLoading}
+      isDisabledButton={!isFormValid}
+      onSubmit={editProfileInfo}
+    >
+      <label className="form__label">
+        E-mail
+        <input
+          name="email"
+          className="form__input"
+          type="email"
+          placeholder="почта"
+          value={enteredValues.email || ""}
+          onChange={handleChangeInput}
+          pattern={EMAIL_REGEX}
+          required
+        />
+        <span className="form__input-error">{errors.email}</span>
+      </label>
+      <label className="form__label">
+        Пароль
+        <input
+          name="password"
+          className="form__input"
+          type="password"
+          minLength="4"
+          maxLength="10"
+          placeholder="пароль"
+          value={enteredValues.password || ""}
+          onChange={handleChangeInput}
+          required
+        />
+        <span className="form__input-error">{errors.password}</span>
+      </label>
+    </Form>
   )
 }
 

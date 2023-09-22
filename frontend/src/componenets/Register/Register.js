@@ -1,57 +1,78 @@
-import Form from '../Form/Form.js'
+import React from "react"
+import "../Form/Form.css"
+import Form from "../Form/Form"
+import { EMAIL_REGEX } from "../../utils/constants.js"
+import useForm from "../../hooks/useForm.js"
 
-function Register() {
+function Register({ isLoading, getRegistrationUser }) {
+  // Хук useForm()
+  const { enteredValues, errors, handleChangeInput, isFormValid } = useForm()
+
+  function editProfileInfo(e) {
+    e.preventDefault()
+    getRegistrationUser({
+      name: enteredValues.name,
+      email: enteredValues.email,
+      password: enteredValues.password,
+    })
+  }
+
   return (
-    <main className='register'>
-      <Form
-        className='form'
-        header='Добро пожаловать!'
-        submit='Зарегистрироваться'
-        text='Уже зарегистрированы?'
-        link='Войти'
-        path='/signin'
-      >
-        <div className='form__input'>
-          <p className='form__input-name'>Имя</p>
-          <input
-            type='text'
-            className='form__input-data'
-            defaultValue='Виталий'
-            placeholder='Введите имя'
-            minLength={2}
-            maxLength={12}
-            required
-          />
-          <p className='form__error'>Что-то пошло не так...</p>
-        </div>
-
-        <div className='form__input'>
-          <p className='form__input-name'>E-mail</p>
-          <input
-            type='email'
-            className='form__input-data'
-            defaultValue='pochta@yandex.ru'
-            placeholder='Введите адрес электронной почты'
-            required
-          />
-          <p className='form__error'>Что-то пошло не так...</p>
-        </div>
-
-        <div className='form__input'>
-          <p className='form__input-name'>Пароль</p>
-          <input
-            type='password'
-            className='form__input-data form__input-data_error'
-            minLength={3}
-            maxLength={25}
-            defaultValue='••••••••••••••'
-            placeholder='Введите пароль'
-            required
-          />
-          <p className='form__error form__error-text'>Что-то пошло не так...</p>
-        </div>
-      </Form>
-    </main>
+    <Form
+      title="Добро пожаловать!"
+      buttonText="Зарегистрироваться"
+      registrationPrompt="Уже зарегистрированы?"
+      linkText=" Войти"
+      link="/signin"
+      onSubmit={editProfileInfo}
+      isLoading={isLoading}
+      isDisabledButton={!isFormValid}
+    >
+      <label className="form__label">
+        Имя
+        <input
+          name="name"
+          className="form__input"
+          type="text"
+          minLength="2"
+          maxLength="40"
+          value={enteredValues.name || ""}
+          onChange={handleChangeInput}
+          placeholder="имя"
+          required
+        />
+        <span className="form__input-error">{errors.name}</span>
+      </label>
+      <label className="form__label">
+        E-mail
+        <input
+          name="email"
+          className="form__input"
+          type="email"
+          value={enteredValues.email || ""}
+          onChange={handleChangeInput}
+          pattern={EMAIL_REGEX}
+          placeholder="почта"
+          required
+        />
+        <span className="form__input-error">{errors.email}</span>
+      </label>
+      <label className="form__label">
+        Пароль
+        <input
+          name="password"
+          className="form__input form__input-data_error"
+          type="password"
+          value={enteredValues.password || ""}
+          onChange={handleChangeInput}
+          placeholder="пароль"
+          minLength="4"
+          maxLength="10"
+          required
+        />
+        <span className="form__input-error">{errors.password}</span>
+      </label>
+    </Form>
   )
 }
 

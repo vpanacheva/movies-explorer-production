@@ -1,24 +1,23 @@
 require('dotenv').config();
-const express = require('express');
 const mongoose = require('mongoose');
+const express = require('express');
 const helmet = require('helmet');
-const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-const { PORT } = require('./utils/constants');
-const { URL } = require('./utils/constants');
 const limiter = require('./middlewares/rateLimiter');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+const router = require('./routes/index');
+const errorHandler = require('./middlewares/errorHandler');
 const cors = require('./middlewares/cors');
 
-const router = require('./routes/index');
+const { URL = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
 
-const { requestLogger, errorLogger } = require('./middlewares/logger');
-
-const error = require('./middlewares/error');
-
-mongoose.set('strictQuery', true);
+const { PORT = 3000 } = process.env;
+const app = express();
 
 mongoose
-  .connect(URL)
+  .connect(URL, {
+    useNewUrlParser: true,
+  })
   .then(() => {
     console.log('БД подключена');
   })
@@ -26,28 +25,22 @@ mongoose
     console.log('Не удалось подключиться к БД');
   });
 
-const app = express();
+app.use(express.json());
 
-app.use(helmet());
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(requestLogger);
 app.use(cors);
 
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
+app.use(requestLogger);
+
+app.use(helmet());
 
 app.use(limiter);
 
 app.use(router);
 
 app.use(errorLogger);
+
 app.use(errors());
-app.use(error);
+
+app.use(errorHandler);
 
 app.listen(PORT);

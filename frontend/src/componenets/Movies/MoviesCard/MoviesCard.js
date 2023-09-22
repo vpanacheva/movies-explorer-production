@@ -1,26 +1,76 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
-import './MoviesCard.css'
-import MoviePoster from '../../../images/harvey.png'
+import React from "react"
+import btnRemoveMovie from "../../../images/removemovie.svg"
+import { converterDurationMovie } from "../../../utils/functionHelpers.js"
+import "./MoviesCard.css"
 
-function MoviesCard() {
-  const location = useLocation()
+function MoviesCard({
+  card,
+  saved,
+  savedMovies,
+  isSavedFilms,
+  getLikeMovie,
+  onDeleteCard,
+}) {
+  function onCardClick() {
+    if (saved) {
+      onDeleteCard(savedMovies.filter((m) => m.movieId === card.id)[0])
+    } else {
+      getLikeMovie(card)
+    }
+  }
+
+  function onDelete() {
+    onDeleteCard(card)
+  }
+
+  const movieLikeBtnClassName = `${
+    saved ? "card__like-button card__like-button_active" : "card__like-button"
+  }`
 
   return (
-    <li className='card'>
-      <a href='https://www.youtube.com/watch?v=_zIK7IloRM4' className='card__link link' target='_blank' rel='noreferrer'>
-        <img className='card__pic' src={MoviePoster} alt="Постер к найденному фильму"/>
-      </a>
-      {location.pathname === '/movies' && (<button className='card__button_save' type='button'></button>)}
-      {location.pathname === '/saved-movies' && (<button className='card__button_remove' type='button'></button>)}
-      
-      {/* {<button className={`${ location.pathname === '/saved-movies' ? "card__button__saved" : "card__button_remove"}`}></button>} */}
-      <div className='card__info'>
-        <h2 className='card__name'>Пи Джей Харви: A dog called money</h2>
-        <p className='card__duration'>1ч 17м</p>
-      </div>
-    </li>
+    <>
+      <li className="card" key={card.id}>
+        <div className="card__wrapper">
+          <a href={card.trailerLink} target="_blank" rel="noreferrer">
+            <img
+              className="card__image"
+              alt={card.nameRU}
+              src={
+                isSavedFilms
+                  ? card.image
+                  : `https://api.nomoreparties.co/${card.image.url}`
+              }
+            />
+          </a>
+          {isSavedFilms ? (
+            <button
+              type="button"
+              className="card__like-remove"
+              onClick={onDelete}
+            >
+              <img
+                className="card__like-remove"
+                src={btnRemoveMovie}
+                alt="крестик удаления карточки с фильмом"
+              />
+            </button>
+          ) : (
+            <button
+              className={movieLikeBtnClassName}
+              onClick={onCardClick}
+              type="button"
+            ></button>
+          )}
+          <div className="card__title-block">
+            <h2 className="card__title">{card.nameRU}</h2>
+            <span className="card__time">
+              {converterDurationMovie(card.duration)}
+            </span>
+          </div>
+        </div>
+      </li>
+    </>
   )
 }
 
-export default MoviesCard 
+export default MoviesCard
