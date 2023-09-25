@@ -1,7 +1,7 @@
 import { getCheckResponse } from "./functionHelpers"
 
 export const BASE_URL = 'https://api.vpanacheva.nomoredomainsrocks.ru';
-//export const BASE_URL = "http://localhost:3000"
+//export const BASE_URL = "http://localhost:3003"
 
 export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
@@ -83,10 +83,10 @@ export const addCard = (data) => {
       duration: data.duration,
       year: data.year,
       description: data.description,
-      image: "https://api.nomoredomainsrocks.ru" + data.image.url,
+      image: "https://api.nomoreparties.co" + data.image.url,
       trailerLink: data.trailerLink,
       thumbnail:
-        "https://api.nomoredomainsrocks.ru" + data.image.formats.thumbnail.url,
+        "https://api.nomoreparties.co" + data.image.formats.thumbnail.url,
       movieId: data.id,
       nameRU: data.nameRU,
       nameEN: data.nameEN,
