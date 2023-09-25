@@ -5,11 +5,10 @@ import { EMAIL_REGEX } from "../../utils/constants.js"
 import useForm from "../../hooks/useForm.js"
 
 function Register({ isLoading, getRegistrationUser }) {
-  // Хук useForm()
   const { enteredValues, errors, handleChangeInput, isFormValid } = useForm()
 
-  function editProfileInfo(e) {
-    e.preventDefault()
+  function editProfileInfo(event) {
+    event.preventDefault();
     getRegistrationUser({
       name: enteredValues.name,
       email: enteredValues.email,
