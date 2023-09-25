@@ -1,7 +1,7 @@
 import { getCheckResponse } from "./functionHelpers"
 
 export const BASE_URL = 'https://api.vpanacheva.nomoredomainsrocks.ru';
-//export const BASE_URL = "http://localhost:3003"
+//export const BASE_URL = "http://localhost:3000"
 
 export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
