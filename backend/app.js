@@ -25,9 +25,9 @@ mongoose
     console.log('Не удалось подключиться к БД');
   });
 
-app.use(cors());
-
 app.use(express.json());
+
+app.use(cors);
 
 app.use(requestLogger);
 
