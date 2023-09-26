@@ -1,6 +1,6 @@
 const allowedCors = [
-  'https://api.vpanacheva.nomoredomainsrocks.ru',
-  'http://api.vpanacheva.nomoredomainsrocks.ru',
+  'https://vpanacheva.nomoredomainsrocks.ru',
+  'http://vpanacheva.nomoredomainsrocks.ru',
   'https://localhost:3000',
   'http://localhost:3000',
   'https://localhost:3001',
