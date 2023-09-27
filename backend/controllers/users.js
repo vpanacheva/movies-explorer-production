@@ -38,22 +38,18 @@ const registrationUser = (req, res, next) => {
 
 const loginUser = (req, res, next) => {
   const { email, password } = req.body;
-  User.findUserByCredentials(email, password)
-  .then(({ _id: userId }) => {
-    if (userId) {
+  return User.findUserByCredentials(email, password)
+    .then((user) => {
       const token = jwt.sign(
-        { userId },
-        NODE_ENV === 'production' ? SECRET_KEY : 'dev-secret',
+        { _id: user._id },
+        NODE_ENV === 'production' ? SECRET_KEY : SECRET_KEY_DEV,
         { expiresIn: '7d' },
       );
 
-      return res.send({ token });
-    }
-
-    throw new UnauthorizedError('Неправильные почта или пароль');
-  })
-  .catch(next);
-}
+      res.send({ token });
+    })
+    .catch(next);
+};
 
 const getUserInfo = (req, res, next) => {
   const userId = req.user._id;
