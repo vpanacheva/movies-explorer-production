@@ -8,6 +8,12 @@ function SearchForm({ searchMovies, onFilterMovies, isShortMovies }) {
   const location = useLocation()
   const [query, setQuery] = useState("")
 
+  function handleShorts() {
+    const checkboxValue = !props.isShortMovies;
+    props.setShorts(checkboxValue)
+    props.handleFilterMovie(values.movie, checkboxValue);
+
+  }
   useEffect(() => {
     if (
       location.pathname === "/movies" &&
@@ -48,7 +54,7 @@ function SearchForm({ searchMovies, onFilterMovies, isShortMovies }) {
       </form>
       <FilterCheckbox
         onFilterMovies={onFilterMovies}
-        isShortMovies={isShortMovies}
+        isShortMovies={handleShorts}
       />
       {isQueryError && (
         <span className="search__form-error">Нужно ввести ключевое слово</span>
