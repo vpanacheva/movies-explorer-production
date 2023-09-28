@@ -76,6 +76,7 @@ function Movies({ loggedIn, savedMovies, getLikeMovie, onDeleteCard }) {
     }
   }, [])
 
+
   useEffect(() => {
     if (localStorage.getItem("movieSearch")) {
       setIsNotFound(filteredMovies.length === 0)
@@ -100,7 +101,7 @@ function Movies({ loggedIn, savedMovies, getLikeMovie, onDeleteCard }) {
         isReqError={isReqError}
         getLikeMovie={getLikeMovie}
         onDeleteCard={onDeleteCard}
-        isNotFound={isNotFound}
+        onSearch={isNotFound}
       />
       <Footer />
     </section>
