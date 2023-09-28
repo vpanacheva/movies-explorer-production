@@ -7,7 +7,7 @@ function SearchForm({ searchMovies, onFilterMovies, isShortMovies }) {
   const [isQueryError, setIsQueryError] = useState(false)
   const location = useLocation()
   const [query, setQuery] = useState("")
-
+//
   useEffect(() => {
     if (
       location.pathname === "/movies" &&
