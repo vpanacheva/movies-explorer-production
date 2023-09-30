@@ -10,7 +10,7 @@ export const getContent = (token) => {
       Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
-    },
+    }
   }).then((res) => getCheckResponse(res))
 }
 

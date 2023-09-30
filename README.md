@@ -22,7 +22,7 @@ https://github.com/vpanacheva/movies-explorer-production.git
 https://github.com/vpanacheva/movies-explorer-production/pulls
 
 ## Ссылка на frontend и api
-API 158.160.79.80
+API 158.160.78.132
 
 frontend https://vpanacheva.nomoredomainsrocks.ru
 backend https://api.vpanacheva.nomoredomainsrocks.ru

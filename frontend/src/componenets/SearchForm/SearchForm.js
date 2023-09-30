@@ -18,6 +18,16 @@ function SearchForm({ searchMovies, onFilterMovies, isShortMovies }) {
     }
   }, [location])
 
+useEffect(() => { 
+  searchMovies(query) 
+}, [isShortMovies]) 
+
+useEffect(() => { 
+  setTimeout(() => { 
+    searchMovies(query) 
+  }, 300) 
+}, [query])
+
   function editProfileInfo(e) {
     e.preventDefault()
     if (query.trim().length === 0) {
